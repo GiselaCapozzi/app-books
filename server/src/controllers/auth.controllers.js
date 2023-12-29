@@ -33,21 +33,21 @@ export const register = async (req, res) => {
     }
 
     if (email) {
-      db.query(`SELECT nombre, apellido, email FROM users WHERE email = ?`, 
-      [email], 
-      (err, result) => {
-        if (err) {
-          console.error(`Error al verificar el correo electrónico: ${err}`);
-          return res.status(500).send('Error interno del servidor');
-        }
+      db.query(`SELECT nombre, apellido, email FROM users WHERE email = ?`,
+        [email],
+        (err, result) => {
+          if (err) {
+            console.error(`Error al verificar el correo electrónico: ${err}`);
+            return res.status(500).send('Error interno del servidor');
+          }
 
-        if (result.length > 0) {
-          // El correo electrónico ya existe
-          return res.status(409).json({
-            message: 'El correo electrónico ya está registrado'
-          })
-        }
-      })
+          if (result.length > 0) {
+            // El correo electrónico ya existe
+            return res.status(409).json({
+              message: 'El correo electrónico ya está registrado'
+            })
+          }
+        })
     }
 
     // Genera un hash de la contraseña antes de almacenarla
@@ -81,7 +81,7 @@ export const login = async (req, res) => {
 
     // Buscar usuario por correo electrónico
     const [rows] = await db.query(`SELECT * FROM users WHERE email = ?`,
-    [email]);
+      [email]);
 
     const user = rows[0];
     console.log(user)
@@ -110,11 +110,35 @@ export const login = async (req, res) => {
       email: user.email,
       avatar: user.avatar
     },
-    process.env.JWT_SECRET, {
+      process.env.JWT_SECRET, {
       expiresIn: '1h'
     })
 
     res.json({ token })
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      error: 'Error en el servidor'
+    })
+  }
+}
+
+export const getUserById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const [rows] = await db.query(`
+      SELECT username, nombre, apellido, email, avatar FROM users WHERE id = ?
+    `, [id]);
+
+    const user = rows[0];
+
+    if (rows.length > 0) {
+      res.json(user)
+    } else {
+      res.status(404).json({
+        mensaje: 'Usuario no encontrado'
+      });
+    }
   } catch (error) {
     console.error(error);
     return res.status(500).json({
