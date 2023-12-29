@@ -21,7 +21,7 @@ db.getConnection((err, connection) => {
 
 db.end(err => {
   if (err) {
-    console.error(`There was an erro: ${err}`)
+    console.error(`There was an error: ${err}`)
     return;
   }
   console.log('Pool closed');
