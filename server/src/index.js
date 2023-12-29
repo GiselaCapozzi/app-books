@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 
 import { router as AuthRoutes } from './routes/auth.routes.js';
+import { router as BooksRoutes } from './routes/book.routes.js';
 
 // Se carga las variables de entorno desde el archivo .env
 dotenv.config();
@@ -26,6 +27,7 @@ app.use(cors({
 }))
 
 app.use('/auth', AuthRoutes);
+app.use('/books', BooksRoutes);
 
 // Inicio del servidor
 app.listen(app.get('port'), () => {

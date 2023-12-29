@@ -6,6 +6,7 @@
 --   publicacion_year INT,
 --   editorial VARCHAR(255),
 --   paginas INT,
+--   portada VARCHAR(255),
 --   CONSTRAINT unique_isbn UNIQUE (isbn),
 --   user_id INT,
 --   FOREIGN KEY (user_id) REFERENCES users(id)
