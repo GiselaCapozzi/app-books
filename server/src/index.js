@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import morgan from 'morgan';
 import cors from 'cors';
 
+import { router as AuthRoutes } from './routes/auth.routes.js';
+
 // Se carga las variables de entorno desde el archivo .env
 dotenv.config();
 
@@ -22,6 +24,8 @@ app.use(cors({
   'methods': ['GET', 'POST', 'PUT', 'DELETE'],
   'origin': ['http://localhost:5173']
 }))
+
+app.use('/auth', AuthRoutes);
 
 // Inicio del servidor
 app.listen(app.get('port'), () => {

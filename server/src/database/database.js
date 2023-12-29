@@ -19,12 +19,4 @@ db.getConnection((err, connection) => {
   console.log(`Connected to MySQL database: ${connection}`);
 })
 
-db.end(err => {
-  if (err) {
-    console.error(`There was an error: ${err}`)
-    return;
-  }
-  console.log('Pool closed');
-})
-
 export default db;
