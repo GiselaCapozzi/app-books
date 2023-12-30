@@ -1,5 +1,23 @@
 import db from '../database/database.js';
 
+// Obtiene los libros ingresados por los usuarios con sus respectivos datos
+export const getAllBooks = async (req, res) => {
+  try {
+    const [rows] = await db.query(`
+      SELECT users.username, users.nombre, users.apellido, users.email, users.avatar,
+      books.*
+      FROM users
+      INNER JOIN books ON users.id = books.user_id
+    `);
+
+    res.json(rows)
+  } catch (err) {
+    res.status(500).json({
+      error: 'Error en el servidor'
+    })
+  }
+}
+
 // Obtiene los libros que tiene un usuario según su id
 export const getAllBooksUserById = async (req, res) => {
   try {
@@ -66,6 +84,7 @@ export const createNewBook = async (req, res) => {
   }
 }
 
+// Actualiza el libro por su Id
 export const updateAnBookById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -100,6 +119,7 @@ export const updateAnBookById = async (req, res) => {
   }
 }
 
+// Elimina un libro por su Id
 export const deleteABookById = async (req, res) => {
   const { id } = req.params;
 
