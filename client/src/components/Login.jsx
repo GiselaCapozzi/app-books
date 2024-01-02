@@ -1,11 +1,18 @@
+import { useState } from "react";
+import { useLogin } from "../hooks/useLogin";
+import { useDispatch } from 'react-redux';
+
 const Login = () => {
+
+const { handleChange, handleSubmit } = useLogin();
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Iniciar sesion</h2>
         </div>
-        <form className="mt-8 space-y-6">
+        <form onSubmit={handleSubmit} className="mt-8 space-y-6">
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="email-address" className="sr-only">
@@ -19,6 +26,7 @@ const Login = () => {
                 required
                 placeholder="Correo electrónico"
                 className="login-input"
+                onChange={handleChange}
               />
             </div>
             <div>
@@ -31,6 +39,7 @@ const Login = () => {
                 required
                 placeholder="Contraseña"
                 className="login-input"
+                onChange={handleChange}
               />
             </div>
           </div>

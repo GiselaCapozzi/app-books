@@ -1,20 +1,59 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setToken } from "../slice/auth/authSlice";
+import { API_ENDPOINTS } from "../api";
+
 export const useLogin = () => {
-  
-  const api_base_url = 'http://localhost:4000/auth';
+
+  const dispatch = useDispatch();
+
+  const [userData, setUserData] = useState({
+    email: '',
+    password: ''
+  })
+
+  const handleChange = ({ target: { name, value } }) => {
+    setUserData({
+      ...userData,
+      [name]: value
+    })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { token } = await loginUser(userData);
+      dispatch(setToken(token))
+      alert('Inicio sesión')
+    } catch (error) {
+
+    }
+  }
 
   const loginUser = async (userData) => {
     try {
-      const response = await fetch(`${api_base_url}/login`, {
-        body: userData
+      const response = await fetch(`${API_ENDPOINTS.USERS}/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData)
       })
-      const data = response.json();
-      return data;
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw errorData;
+      }
+
+      const responseData = await response.json();
+      return responseData;
     } catch (error) {
-      throw error.response.data
+      throw error.error
     }
   }
-  
+
   return {
-    loginUser
+    handleChange,
+    handleSubmit
   }
 }
