@@ -1,7 +1,15 @@
+import { useAuth } from '../context/AuthContext';
+
 
 const Home = () => {
-  return (
-    <div>Home</div>
+
+const { user, isAuthenticated, token } = useAuth();
+console.log({user, isAuthenticated, token})
+
+return (
+    <div>
+      <p>{user.username}</p>
+    </div>
   )
 }
 

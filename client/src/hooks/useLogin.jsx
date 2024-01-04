@@ -22,8 +22,9 @@ export const useLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { token } = await loginUser(userData);
-      dispatch(setToken(token))
+      const { user, token } = await loginUser(userData);
+      console.log(user)
+      dispatch(setToken({ user, token }))
       alert('Inicio sesión')
     } catch (error) {
 
