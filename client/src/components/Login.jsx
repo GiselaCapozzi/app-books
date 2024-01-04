@@ -1,6 +1,4 @@
-import { useState } from "react";
 import { useLogin } from "../hooks/useLogin";
-import { useDispatch } from 'react-redux';
 
 const Login = () => {
 
@@ -23,7 +21,7 @@ const { handleChange, handleSubmit } = useLogin();
                 name="email"
                 id="email-address"
                 autoComplete="email"
-                required
+                // required
                 placeholder="Correo electrónico"
                 className="login-input"
                 onChange={handleChange}
@@ -36,7 +34,7 @@ const { handleChange, handleSubmit } = useLogin();
                 name="password"
                 id="password"
                 autoComplete="current-password"
-                required
+                // required
                 placeholder="Contraseña"
                 className="login-input"
                 onChange={handleChange}

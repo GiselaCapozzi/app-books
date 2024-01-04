@@ -88,7 +88,7 @@ export const login = async (req, res) => {
 
     if (!user) {
       return res.status(401).json({
-        error: 'Error en el servidor'
+        error: 'No se encontro el email'
       })
     }
 
@@ -114,7 +114,7 @@ export const login = async (req, res) => {
       expiresIn: '1h'
     })
 
-    res.json({ token })
+    res.json({ token, user })
   } catch (error) {
     console.error(error);
     return res.status(500).json({
@@ -124,11 +124,13 @@ export const login = async (req, res) => {
 }
 
 export const getUserById = async (req, res) => {
-  const { id } = req.params;
+  // const { id } = req.params;
+
+  const userId = req.user.id;
   try {
     const [rows] = await db.query(`
       SELECT username, nombre, apellido, email, avatar FROM users WHERE id = ?
-    `, [id]);
+    `, [userId]);
 
     const user = rows[0];
 

@@ -4,9 +4,11 @@ import {
   login, 
   register 
 } from '../controllers/auth.controllers.js';
+import { verifyToken } from '../middlewares/authMiddleware.js';
+
 
 export const router = Router();
 
 router.post('/register', register);
 router.post('/login', login);
-router.get('/:id', getUserById);
+router.get('/me', verifyToken, getUserById);
