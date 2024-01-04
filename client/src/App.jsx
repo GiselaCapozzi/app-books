@@ -4,18 +4,17 @@ import Home from './components/Home';
 import Navbar from './components/Navbar';
 import { useDispatch } from 'react-redux';
 import { setToken } from './slice/auth/authSlice';
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider } from './context/authContext';
 
 const App = () => {
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  // const storedToken = sessionStorage.getItem('token');
-  const storedUser = sessionStorage.getItem('user');
+  // const storedUser = JSON.parse(sessionStorage.getItem('user'));
 
-  if (storedUser) {
-    dispatch(setToken(JSON.parse(storedUser)))
-  }
+  // if (storedUser) {
+  //   dispatch(setToken(storedUser))
+  // }
 
   return (
     <BrowserRouter>

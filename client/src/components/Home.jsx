@@ -1,4 +1,4 @@
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/authContext';
 
 
 const Home = () => {
@@ -8,7 +8,7 @@ console.log({user, isAuthenticated, token})
 
 return (
     <div>
-      <p>{user.username}</p>
+      <p>{user && user.username}</p>
     </div>
   )
 }
