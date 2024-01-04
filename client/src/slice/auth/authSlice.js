@@ -14,14 +14,13 @@ export const authSlice = createSlice({
       state.isAuthenticated = true;
       state.user = action.payload.user;
       state.token = action.payload.token;
-      console.log(state.user)
-      // sessionStorage.setItem('token', action.payload)
+      sessionStorage.setItem('user', JSON.stringify(state));
     },
     clearToken: (state) => {
       state.isAuthenticated = false;
       state.user = null;
       state.token = null;
-      sessionStorage.removeItem('token')
+      sessionStorage.removeItem('user')
     }
   }
 })
