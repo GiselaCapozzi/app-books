@@ -6,7 +6,7 @@ const Enlaces = ({ to, children, onClick }) => {
       <li>
         <Link
         to={to}
-        className="transition ease-in-out duration-500 text-black font-bold hover:text-white lg:ml-7"
+        className="transicion text-black font-bold hover:text-white lg:ml-7"
         onClick={onClick}
         >{children}</Link>
       </li>
