@@ -57,3 +57,10 @@
   justify-center
   items-center
 }
+
+.transicion {
+  @apply
+  transition
+  ease-in-out 
+  duration-500
+}
