@@ -44,3 +44,16 @@
   focus:ring-offset-2
   focus:ring-indigo-500
 }
+
+.avatar {
+  @apply
+  rounded-full 
+  bg-slate-300 p-2
+}
+
+.centrar {
+  @apply
+  flex
+  justify-center
+  items-center
+}

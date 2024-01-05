@@ -2,10 +2,12 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setToken } from "../slice/auth/authSlice";
 import { API_ENDPOINTS } from "../api";
+import { useNavigate } from "react-router-dom";
 
 export const useLogin = () => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [userData, setUserData] = useState({
     email: '',
@@ -25,6 +27,7 @@ export const useLogin = () => {
       const { user, token, isAuthenticated = true } = await loginUser(userData);
       dispatch(setToken({ user, token, isAuthenticated }))
       sessionStorage.setItem('user', JSON.stringify(user))
+      navigate('/')
       alert('Inicio sesión')
     } catch (error) {
 
