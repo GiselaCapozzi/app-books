@@ -22,9 +22,9 @@ export const useLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { user, token } = await loginUser(userData);
-      console.log(user)
-      dispatch(setToken({ user, token }))
+      const { user, token, isAuthenticated = true } = await loginUser(userData);
+      dispatch(setToken({ user, token, isAuthenticated }))
+      sessionStorage.setItem('user', JSON.stringify(user))
       alert('Inicio sesión')
     } catch (error) {
 

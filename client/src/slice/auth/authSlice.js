@@ -11,16 +11,14 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setToken: (state, action) => {
-      state.isAuthenticated = true;
+      state.isAuthenticated = action.payload.isAuthenticated;
       state.user = action.payload.user;
       state.token = action.payload.token;
-      sessionStorage.setItem('user', JSON.stringify(state));
     },
     clearToken: (state) => {
       state.isAuthenticated = false;
       state.user = null;
       state.token = null;
-      sessionStorage.removeItem('user')
     }
   }
 })
