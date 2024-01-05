@@ -8,13 +8,13 @@ import { AuthProvider } from './context/authContext';
 
 const App = () => {
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const storedUser = JSON.parse(sessionStorage.getItem('user'));
+  const storedUser = JSON.parse(sessionStorage.getItem('user'));
 
-  // if (storedUser) {
-  //   dispatch(setToken(storedUser))
-  // }
+  if (storedUser) {
+    dispatch(setToken(storedUser))
+  }
 
   return (
     <BrowserRouter>
