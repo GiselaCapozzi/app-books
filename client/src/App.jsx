@@ -1,12 +1,14 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Login from './components/Login';
-import Home from './components/Home';
-import Navbar from './components/Navbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearToken, setToken } from './slice/auth/authSlice';
 import { AuthProvider } from './context/authContext';
+
+import Login from './components/Login';
+import Home from './components/Home';
+import Navbar from './components/Navbar';
 import Library from './components/Library';
 import AboutBook from './components/AboutBook';
+import NewBook from './components/NewBook';
 
 const App = () => {
 
@@ -32,6 +34,7 @@ const App = () => {
           <Route path='/login' element={<Login />} />
           <Route path='/library' element={<Library />} />
           <Route path={`/library/:titulo`} element={<AboutBook />} />
+          <Route path='new_book' element={<NewBook />}/>
         </Routes>
       </AuthProvider>
     </BrowserRouter>

@@ -5,8 +5,8 @@ const BookTable = ({ books }) => {
   const { handleAbout } = useBook();
 
   return (
-    <div className={`container mx-auto my-16`}>
-      <table className="min-w-full bg-white border border-gray-300">
+    <div className={`container mx-auto my-16 flex items-center justify-center`}>
+      <table className="bg-white border border-gray-300">
         <thead>
           <tr>
             <th className="p-3 border border-gray-300">Titulo</th>
@@ -21,15 +21,21 @@ const BookTable = ({ books }) => {
           {
             books.length > 0 &&
             books?.map(book => (
-              <tr key={book.id}>
+              <tr key={book.id} className="text-center">
                 <td className="p-3 border border-gray-300">{book.titulo}</td>
                 <td className="p-3 border border-gray-300">{book.autor}</td>
                 <td className="p-3 border border-gray-300">{book.publicacion_year}</td>
                 <td className="p-3 border border-gray-300">{book.editorial}</td>
                 <td className="p-3 border border-gray-300">
-                  <img src={book.portada ? book.portada : 'https://www.cucea.udg.mx/sites/default/files/styles/publicaciones/public/publicaciones/portadas/sin_portada_8.jpg?itok=yR2MLoZs'} alt="portada" className="w-16 h-24 object-cover" />
+                  <img 
+                  src={
+                    book.portada ? 
+                    book.portada : 
+                    'https://www.cucea.udg.mx/sites/default/files/styles/publicaciones/public/publicaciones/portadas/sin_portada_8.jpg?itok=yR2MLoZs'} 
+                  alt={book.titulo} 
+                  className="w-16 h-24 object-cover m-auto" />
                 </td>
-                <td>
+                <td className="p-3 border border-gray-300">
                   <button
                     className="items-end rounded bg-green-600 p-2 shadow-sm shadow-black hover:bg-green-500 transicion"
                     onClick={() => handleAbout(book)}

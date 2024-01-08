@@ -1,19 +1,15 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useAuth } from '../context/authContext';
-import { fetchBooks } from '../slice/books/bookSlice';
 import BookTable from './BookTable';
 import BookCard from './BookCard';
+import useLibrary from '../hooks/useLibrary';
 
 const Library = () => {
 
-  const dispatch = useDispatch();
-  const { books, status, error } = useSelector(state => state.books);
-  const { token } = useAuth();
-
-  useEffect(() => {
-    dispatch(fetchBooks(token))
-  }, [dispatch]);
+  const {
+    status,
+    token,
+    books,
+    goToCreateNewBook
+  } = useLibrary();
 
   if (status === 'loading') {
     return <div>Cargando ...</div>
@@ -28,13 +24,16 @@ const Library = () => {
       {
         token &&
         <>
+          <button
+            onClick={goToCreateNewBook}
+            className='button-login'>Agregar un nuevo libro</button>
           <div className='hidden lg:block'>
             <BookTable
               books={books}
             />
           </div>
           <div className='md:block lg:hidden flex w-full flex-wrap justify-center items-center'>
-            <BookCard 
+            <BookCard
               books={books}
             />
           </div>
