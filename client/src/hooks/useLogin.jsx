@@ -26,7 +26,7 @@ export const useLogin = () => {
     try {
       const { user, token, isAuthenticated = true } = await loginUser(userData);
       dispatch(setToken({ user, token, isAuthenticated }))
-      sessionStorage.setItem('user', JSON.stringify(user))
+      sessionStorage.setItem('user', JSON.stringify({user, token, isAuthenticated }))
       navigate('/')
       alert('Inicio sesión')
     } catch (error) {
