@@ -14,6 +14,7 @@ export const authSlice = createSlice({
       state.isAuthenticated = action.payload.isAuthenticated;
       state.user = action.payload.user;
       state.token = action.payload.token;
+      sessionStorage.setItem('user', JSON.stringify(action.payload));
     },
     clearToken: (state) => {
       state.isAuthenticated = false;

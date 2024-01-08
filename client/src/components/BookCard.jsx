@@ -1,7 +1,7 @@
 import useBook from "../hooks/useBook"
 
 const BookCard = ({ books }) => {
-const { handleAbout } = useBook();
+  const { handleAbout } = useBook();
 
   return (
     <>
@@ -17,18 +17,15 @@ const { handleAbout } = useBook();
                 <div className="flex font-bold text-md text-center mb-2">{book.titulo}</div>
                 <div className="flex flex-col max-w-52">
                   <p className="text-gray-700 text-xs"><span className="font-bold underline italic">Autor:</span> {book.autor}</p>
-                  <p className="text-gray-700 text-xs"><span className="font-bold underline italic">ISBN:</span> {book.isbn}</p>
                   <p className="text-gray-700 text-xs"><span className="font-bold underline italic">Año de Publicación:</span> {book.publicacion_year}</p>
                   <p className="text-gray-700 text-xs"><span className="font-bold underline italic">Editorial:</span> {book.editorial}</p>
-                  <p className="text-gray-700 text-xs"><span className="font-bold underline italic">Páginas:</span> {book.paginas}</p>
                 </div>
-                <p className="text-gray-700 text-xs mt-2">{book.sinopsis.slice(0, 50)}...</p>
               </div>
             </div>
             <div className="flex justify-center w-full">
-              <button 
-              className="items-end rounded bg-green-600 p-2 shadow-sm shadow-black hover:bg-green-500 transicion"
-              onClick={() => handleAbout(book.titulo)}
+              <button
+                className="items-end rounded bg-green-600 p-2 shadow-sm shadow-black hover:bg-green-500 transicion"
+                onClick={() => handleAbout(book)}
               >
                 Ver más
               </button>
