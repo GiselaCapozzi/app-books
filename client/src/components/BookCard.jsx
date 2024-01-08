@@ -22,7 +22,7 @@ const BookCard = ({ books }) => {
                 </div>
               </div>
             </div>
-            <div className="flex justify-center w-full">
+            <div className="flex justify-center w-full mt-2">
               <button
                 className="items-end rounded bg-green-600 p-2 shadow-sm shadow-black hover:bg-green-500 transicion"
                 onClick={() => handleAbout(book)}
