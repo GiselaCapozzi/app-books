@@ -7,7 +7,7 @@ const BookCard = ({ books }) => {
     <>
       {
         books.length > 0
-        && books?.map(book => (
+        ? books?.map(book => (
           <div key={book.id} className="max-w-96 max-h-96 rounded overflow-hidden shadow-inner shadow-blue-300 m-9 p-3 bg-gray-200">
             <div className=" flex flex-row">
               <div className="self-center ml-4">
@@ -31,7 +31,8 @@ const BookCard = ({ books }) => {
               </button>
             </div>
           </div>
-        ))
+        )) :
+        <p>Aún no has agregado libros a tu biblioteca</p>
       }
     </>
   )

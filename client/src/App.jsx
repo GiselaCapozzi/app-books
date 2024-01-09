@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearToken, setToken } from './slice/auth/authSlice';
 import { AuthProvider } from './context/authContext';
@@ -8,7 +8,7 @@ import Home from './components/Home';
 import Navbar from './components/Navbar';
 import Library from './components/Library';
 import AboutBook from './components/AboutBook';
-import NewBook from './components/NewBook';
+import FormBook from './components/FormBook';
 
 const App = () => {
 
@@ -23,6 +23,7 @@ const App = () => {
 
   if (tokenData && tokenData.exp < Date.now() / 1000) {
     dispatch(clearToken())
+    window.location.href = '/'
   }
 
   return (
@@ -34,7 +35,7 @@ const App = () => {
           <Route path='/login' element={<Login />} />
           <Route path='/library' element={<Library />} />
           <Route path={`/library/:titulo`} element={<AboutBook />} />
-          <Route path='new_book' element={<NewBook />}/>
+          <Route path='/form_book' element={<FormBook />}/>
         </Routes>
       </AuthProvider>
     </BrowserRouter>

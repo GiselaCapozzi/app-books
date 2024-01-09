@@ -1,8 +1,13 @@
 import { useLocation } from 'react-router-dom';
+import useAboutBook from '../hooks/useAboutBook';
 
-const AboutBook = ({ onEdit, onDelete }) => {
+const AboutBook = () => {
 
-  const location = useLocation();
+  const { 
+    onEdit, 
+    onDelete,
+    location
+  } = useAboutBook();
 
   const {
     titulo,
@@ -36,7 +41,10 @@ const AboutBook = ({ onEdit, onDelete }) => {
         </div>
       </div>
       <div className="mt-4 flex justify-end">
-        <button className="mr-2 bg-blue-500 text-white px-4 py-2 rounded-md" onClick={onEdit}>
+        <button
+          className="mr-2 bg-blue-500 text-white px-4 py-2 rounded-md"
+          onClick={onEdit}
+        >
           Editar
         </button>
         <button className="bg-red-500 text-white px-4 py-2 rounded-md" onClick={onDelete}>

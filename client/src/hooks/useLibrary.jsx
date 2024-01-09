@@ -16,11 +16,12 @@ const useLibrary = () => {
   }, [dispatch]);
 
   const goToCreateNewBook = () => {
-    navigate('/new_book');
+    navigate('/form_book');
   }
 
   return {
     status,
+    error,
     token,
     books,
     goToCreateNewBook
