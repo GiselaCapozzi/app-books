@@ -6,6 +6,7 @@ const Library = () => {
 
   const {
     status,
+    error,
     token,
     books,
     goToCreateNewBook
@@ -15,7 +16,7 @@ const Library = () => {
     return <div>Cargando ...</div>
   }
 
-  if (status === 'failed') {
+  if (status === 'failed' && error != 'Unexpected end of JSON input') {
     return <div>Error...</div>
   }
 
