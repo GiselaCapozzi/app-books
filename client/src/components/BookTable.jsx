@@ -1,39 +1,14 @@
-import { useState } from "react";
 import useBook from "../hooks/useBook";
 import Icon from './Icon';
 import { faArrowsUpDown } from '@fortawesome/free-solid-svg-icons';
 
 const BookTable = ({ books }) => {
 
-  const { handleAbout } = useBook();
-  const [sortedBooks, setSortedBooks] = useState(books);
-  const [iAscending, setIsAscending] = useState(true);
-
-  const handleSort = (e) => {
-    const sorted = [...sortedBooks].sort((a, b) => {
-      if (e.target.innerText === 'Año de publicación') {
-        return iAscending
-          ? a.publicacion_year - b.publicacion_year
-          : b.publicacion_year - a.publicacion_year;
-      } else if (e.target.innerText === 'Título') {
-        return iAscending
-          ? a.titulo.localeCompare(b.titulo)
-          : b.titulo.localeCompare(a.titulo)
-      } else if (e.target.innerText === 'Autor') {
-        return iAscending
-          ? a.autor.localeCompare(b.autor)
-          : b.autor.localeCompare(a.autor)
-      } else if (e.target.innerText === 'Editorial') {
-        return iAscending
-          ? a.editorial.localeCompare(b.editorial)
-          : b.editorial.localeCompare(a.editorial)
-      }
-    })
-    setSortedBooks(sorted);
-    setIsAscending(!iAscending);
-  }
-
-
+  const { 
+    handleAbout,
+    handleSort,
+    sortedBooks
+  } = useBook(books);
   return (
     <div className={`container mx-auto my-16 flex items-center justify-center`}>
       <table className="bg-white border border-gray-300">
@@ -88,7 +63,7 @@ const BookTable = ({ books }) => {
         </thead>
         <tbody>
           {
-            sortedBooks.length > 0 &&
+            sortedBooks?.length > 0 &&
             sortedBooks?.map(book => (
               <tr key={book.id} className="text-center">
                 <td className="p-3 border border-gray-300">{book.titulo}</td>

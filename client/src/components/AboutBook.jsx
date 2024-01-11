@@ -1,13 +1,14 @@
-import { useLocation } from 'react-router-dom';
 import useAboutBook from '../hooks/useAboutBook';
+import { useAuth } from '../context/authContext';
 
 const AboutBook = () => {
 
-  const { 
-    onEdit, 
+  const {
+    onEdit,
     onDelete,
     location
   } = useAboutBook();
+  const { token } = useAuth();
 
   const {
     titulo,
@@ -17,8 +18,10 @@ const AboutBook = () => {
     portada,
     sinopsis,
     paginas,
-    publicacion_year
+    publicacion_year,
+    id
   } = location.state.book;
+
 
   return (
     <div className='centrar flex-col bg-white p-4 mb-4 shadow-md rounded-md'>
@@ -47,7 +50,10 @@ const AboutBook = () => {
         >
           Editar
         </button>
-        <button className="bg-red-500 text-white px-4 py-2 rounded-md" onClick={onDelete}>
+        <button
+          className="bg-red-500 text-white px-4 py-2 rounded-md"
+          onClick={() => onDelete(token, id)}
+        >
           Eliminar
         </button>
       </div>

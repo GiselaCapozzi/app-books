@@ -24,7 +24,8 @@ const useLibrary = () => {
     error,
     token,
     books,
-    goToCreateNewBook
+    goToCreateNewBook,
+    fetchBooks
   }
 }
 

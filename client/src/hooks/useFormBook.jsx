@@ -1,6 +1,6 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from 'react-redux';
-import { createBook, updateBook } from "../slice/books/bookSlice";
+import { createBook, fetchBooks, updateBook } from "../slice/books/bookSlice";
 import { useAuth } from "../context/authContext";
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
@@ -16,6 +16,10 @@ const useFormBook = (initialValue, isEditing) => {
   const navigate = useNavigate();
   const { token } = useAuth();
 
+useEffect(() => {
+  dispatch(fetchBooks(token))
+}, [dispatch, isEditing])
+
   const id = initialValue.id;
 
   const handleChange = ({ target: { name, value } }) => {
@@ -25,55 +29,65 @@ const useFormBook = (initialValue, isEditing) => {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!bookData.titulo || !bookData.autor || !bookData.isbn) {
       return setError({
-        titulo: !bookData.titulo ? 'El título no puede estar vació' : '',
-        autor: !bookData.autor ? 'El autor no puede estar vació' : '',
-        isbn: !bookData.isbn ? 'El código ISBN no puede estar vació' : '',
+        titulo: !bookData.titulo ? 'El título no puede estar vacío' : '',
+        autor: !bookData.autor ? 'El autor no puede estar vacío' : '',
+        isbn: !bookData.isbn ? 'El código ISBN no puede estar vacío' : '',
       });
     }
-
-    if (isEditing) {
-      dispatch(updateBook({ token, bookData, id }))
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: isEditing ? 'El libro ha sido actualizado' : 'El libro ha sido agregado',
-        showConfirmButton: false,
-        timer: 1500
-      })
-      navigate('/library')
-    } else {
-      dispatch(createBook({ token, bookData }));
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: isEditing ? 'El libro ha sido actualizado' : 'El libro ha sido agregado',
-        showConfirmButton: false,
-        timer: 1500
-      })
-      Swal.fire({
-        title: '¿Queres seguir agregando?',
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        confirmButtonText: 'Si, continuar!'
-      }).then(result => {
-        if (result.isDismissed) {
-          navigate('/library')
-        }
-      })
-
+  
+    try {
+      if (isEditing) {
+        await dispatch(updateBook({ token, bookData, id }));
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'El libro ha sido actualizado',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else {
+        await dispatch(createBook({ token, bookData }));
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'El libro ha sido agregado',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        Swal.fire({
+          title: '¿Quieres seguir agregando?',
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Sí, continuar!',
+        }).then((result) => {
+          if (result.isDismissed) {
+            navigate('/library');
+          }
+        });
+      }
+  
+      // Fetch the updated list of books
+      await dispatch(fetchBooks(token));
+  
+      // Reset form data and errors
       setBookData(initialValue);
       setError({
         titulo: '',
         autor: '',
-        isbn: ''
-      })
+        isbn: '',
+      });
+  
+      // Navigate to the library page
+      // navigate('/library');
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
 
   return {
     bookData,

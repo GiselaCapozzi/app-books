@@ -1,6 +1,9 @@
 import BookTable from './BookTable';
 import BookCard from './BookCard';
 import useLibrary from '../hooks/useLibrary';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchBooks } from '../slice/books/bookSlice';
 
 const Library = () => {
 
@@ -9,8 +12,13 @@ const Library = () => {
     error,
     token,
     books,
-    goToCreateNewBook
+    goToCreateNewBook,
   } = useLibrary();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchBooks(token))
+  }, [dispatch])
 
   if (status === 'loading') {
     return <div>Cargando ...</div>
