@@ -1,38 +1,65 @@
 import useBook from "../hooks/useBook"
 
 const BookCard = ({ books }) => {
-  const { handleAbout } = useBook();
+  const {
+    handleAbout,
+    handleSort,
+    sortedBooks,
+  } = useBook(books);
 
   return (
     <>
+      <div className="centrar my-7">
+      <p>Ordenar por:</p>
+        <button onClick={handleSort}
+          className="items-end rounded bg-green-600 p-2 shadow-sm shadow-black hover:bg-green-500 transicion mx-1"
+        >
+          Título
+        </button>
+        <button onClick={handleSort}
+          className="items-end rounded bg-green-600 p-2 shadow-sm shadow-black hover:bg-green-500 transicion mx-1"
+        >
+          Autor
+        </button>
+        <button onClick={handleSort}
+          className="items-end rounded bg-green-600 p-2 shadow-sm shadow-black hover:bg-green-500 transicion mx-1"
+        >
+          Editorial
+        </button>
+        <button onClick={handleSort}
+          className="items-end rounded bg-green-600 p-2 shadow-sm shadow-black hover:bg-green-500 transicion mx-1"
+        >
+          Año de publicación
+        </button>
+      </div>
       {
-        books.length > 0
-        ? books?.map(book => (
-          <div key={book.id} className="max-w-96 max-h-96 rounded overflow-hidden shadow-inner shadow-blue-300 m-9 p-3 bg-gray-200">
-            <div className=" flex flex-row">
-              <div className="self-center ml-4">
-                <img className="max-w-32" src={book.portada ? book.portada : 'https://www.cucea.udg.mx/sites/default/files/styles/publicaciones/public/publicaciones/portadas/sin_portada_8.jpg?itok=yR2MLoZs'} alt={book.titulo} />
-              </div>
-              <div className="px-6 py-4">
-                <div className="flex font-bold text-md text-center mb-2">{book.titulo}</div>
-                <div className="flex flex-col max-w-52">
-                  <p className="text-gray-700 text-xs"><span className="font-bold underline italic">Autor:</span> {book.autor}</p>
-                  <p className="text-gray-700 text-xs"><span className="font-bold underline italic">Año de Publicación:</span> {book.publicacion_year}</p>
-                  <p className="text-gray-700 text-xs"><span className="font-bold underline italic">Editorial:</span> {book.editorial}</p>
+        sortedBooks?.length > 0
+          ? sortedBooks?.map(book => (
+            <div key={book.id} className="max-w-96 max-h-96 rounded overflow-hidden shadow-inner shadow-blue-300 m-9 p-3 bg-gray-200">
+              <div className=" flex flex-row">
+                <div className="self-center ml-4">
+                  <img className="max-w-32" src={book.portada ? book.portada : 'https://www.cucea.udg.mx/sites/default/files/styles/publicaciones/public/publicaciones/portadas/sin_portada_8.jpg?itok=yR2MLoZs'} alt={book.titulo} />
+                </div>
+                <div className="px-6 py-4">
+                  <div className="flex font-bold text-md text-center mb-2">{book.titulo}</div>
+                  <div className="flex flex-col max-w-52">
+                    <p className="text-gray-700 text-xs"><span className="font-bold underline italic">Autor:</span> {book.autor}</p>
+                    <p className="text-gray-700 text-xs"><span className="font-bold underline italic">Año de Publicación:</span> {book.publicacion_year}</p>
+                    <p className="text-gray-700 text-xs"><span className="font-bold underline italic">Editorial:</span> {book.editorial}</p>
+                  </div>
                 </div>
               </div>
+              <div className="flex justify-center w-full mt-2">
+                <button
+                  className="items-end rounded bg-green-600 p-2 shadow-sm shadow-black hover:bg-green-500 transicion"
+                  onClick={() => handleAbout(book)}
+                >
+                  Ver más
+                </button>
+              </div>
             </div>
-            <div className="flex justify-center w-full mt-2">
-              <button
-                className="items-end rounded bg-green-600 p-2 shadow-sm shadow-black hover:bg-green-500 transicion"
-                onClick={() => handleAbout(book)}
-              >
-                Ver más
-              </button>
-            </div>
-          </div>
-        )) :
-        <p>Aún no has agregado libros a tu biblioteca</p>
+          )) :
+          <p>Aún no has agregado libros a tu biblioteca</p>
       }
     </>
   )

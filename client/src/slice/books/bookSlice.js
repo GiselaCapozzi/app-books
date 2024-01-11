@@ -8,6 +8,7 @@ const initialState = {
 }
 
 export const fetchBooks = createAsyncThunk('books/fetchBooks', async (token) => {
+try {
   const response = await fetch(`${API_ENDPOINTS.BOOKS}`, {
     headers: {
       'Content-Type': 'application/json',
@@ -19,7 +20,16 @@ export const fetchBooks = createAsyncThunk('books/fetchBooks', async (token) => 
     throw new Error('Error al obtener libros')
   }
   const data = await response.json();
+
+if (!Array.isArray(data)) {
+  throw new Error('Respuesta no válida')
+}
+
   return data;
+} catch (error) {
+  console.log(error);
+  throw error
+}
 })
 
 export const createBook = createAsyncThunk('books/createBook', async ({ token, bookData }) => {
@@ -33,7 +43,7 @@ export const createBook = createAsyncThunk('books/createBook', async ({ token, b
       }
     })
     const data = await response.json();
-    return data;
+    return data || [];
   } catch (error) {
     console.log(error)
   }
@@ -57,6 +67,21 @@ export const updateBook = createAsyncThunk('books/updateBook', async ({ token, b
   }
 })
 
+export const deleteBook = createAsyncThunk('books/deleteBook', async ({ token, id }) => {
+    try {
+    const response = await fetch(`${API_ENDPOINTS.BOOKS}/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: token
+      }
+    })
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error)
+  }
+})
+
 export const booksSlice = createSlice({
   name: 'books',
   initialState,
@@ -68,7 +93,7 @@ export const booksSlice = createSlice({
       })
       .addCase(fetchBooks.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.books = action.payload;
+        state.books = action.payload || [];
       })
       .addCase(fetchBooks.rejected, (state, action) => {
         state.status = 'failed';
@@ -81,10 +106,12 @@ export const booksSlice = createSlice({
       })
       .addCase(updateBook.fulfilled, (state, action) => {
         state.status= 'succeeded';
-        const index = state.books.findIndex(book => book.id === action.payload.id);
-        if (index !== -1) {
-          state.books[index] = action.payload;
-        }
+        state.books = state.books.map(book => book.id === action.payload.id ? action.payload : book);
+      })
+      .addCase(deleteBook.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.books = state.books.filter(book => book.id !== action.payload);
+
       })
   }
 })
