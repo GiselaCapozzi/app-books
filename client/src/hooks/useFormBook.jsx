@@ -38,7 +38,6 @@ useEffect(() => {
         isbn: !bookData.isbn ? 'El código ISBN no puede estar vacío' : '',
       });
     }
-  
     try {
       if (isEditing) {
         await dispatch(updateBook({ token, bookData, id }));
@@ -49,6 +48,7 @@ useEffect(() => {
           showConfirmButton: false,
           timer: 1500,
         });
+        navigate('/library')
       } else {
         await dispatch(createBook({ token, bookData }));
         Swal.fire({
@@ -81,9 +81,6 @@ useEffect(() => {
         autor: '',
         isbn: '',
       });
-  
-      // Navigate to the library page
-      // navigate('/library');
     } catch (error) {
       console.log(error);
     }

@@ -4,11 +4,13 @@ import { clearToken, setToken } from './slice/auth/authSlice';
 import { AuthProvider } from './context/authContext';
 
 import Login from './components/Login';
+import Register from './components/Register';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
 import Library from './components/Library';
 import AboutBook from './components/AboutBook';
 import FormBook from './components/FormBook';
+import Profile from './components/Profile';
 
 const App = () => {
 
@@ -33,6 +35,8 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/profile' element={<Profile />}/>
           <Route path='/library' element={<Library />} />
           <Route path={`/library/:titulo`} element={<AboutBook />} />
           <Route path='/form_book' element={<FormBook />}/>
