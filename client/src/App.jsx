@@ -11,6 +11,7 @@ import Library from './components/Library';
 import AboutBook from './components/AboutBook';
 import FormBook from './components/FormBook';
 import Profile from './components/Profile';
+import Catalogue from './components/Catalogue';
 
 const App = () => {
 
@@ -40,6 +41,7 @@ const App = () => {
           <Route path='/library' element={<Library />} />
           <Route path={`/library/:titulo`} element={<AboutBook />} />
           <Route path='/form_book' element={<FormBook />}/>
+          <Route path='/catalogue' element={<Catalogue />}/>
         </Routes>
       </AuthProvider>
     </BrowserRouter>
