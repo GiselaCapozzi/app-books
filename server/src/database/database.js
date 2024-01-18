@@ -4,7 +4,7 @@ dotenv.config();
 
 // Creación de la pool de MySQL
 const db = createPool({
-  host: process.env.HOST || '',
+  host: process.env.HOST || '127.0.0.1:3306',
   user: process.env.USER || '',
   password: process.env.PASSWORD || '',
   database: process.env.DATABASE || '',
