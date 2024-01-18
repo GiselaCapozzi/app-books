@@ -1,4 +1,4 @@
-import { configureStore, applyMiddleware } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import { authSlice } from '../slice/auth/authSlice';
 import booksReducer from '../slice/books/bookSlice';
 import booksUsersReducer from '../slice/booksAllUser/booksUsersSlice';
