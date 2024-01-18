@@ -1,6 +1,6 @@
 import { faUserLarge } from "@fortawesome/free-solid-svg-icons";
 import Icon from "../components/Icon";
-import { useAuth } from "../context/authContext";
+import { useAuth } from "../context/AuthContext";
 
 const Profile = () => {
 const { user } = useAuth();

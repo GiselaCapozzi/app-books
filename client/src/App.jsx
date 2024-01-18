@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearToken, setToken } from './slice/auth/authSlice';
-import { AuthProvider } from './context/authContext';
+import { AuthProvider } from './context/AuthContext';
 
 import Login from './containers/Login';
 import Register from './containers/Register';
