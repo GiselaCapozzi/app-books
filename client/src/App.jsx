@@ -3,15 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearToken, setToken } from './slice/auth/authSlice';
 import { AuthProvider } from './context/authContext';
 
-import Login from './components/Login';
-import Register from './components/Register';
-import Home from './components/Home';
-import Navbar from './components/Navbar';
-import Library from './components/Library';
-import AboutBook from './components/AboutBook';
-import FormBook from './components/FormBook';
-import Profile from './components/Profile';
-import Catalogue from './components/Catalogue';
+import Login from './containers/Login';
+import Register from './containers/Register';
+import Home from './containers/Home';
+import Navbar from './containers/Navbar';
+import Library from './containers/Library';
+import AboutBook from './containers/AboutBook';
+import FormBook from './containers/FormBook';
+import Profile from './containers/Profile';
+import Catalogue from './containers/Catalogue';
+import InfoBook from './containers/InfoBook';
 
 const App = () => {
 
@@ -40,8 +41,10 @@ const App = () => {
           <Route path='/profile' element={<Profile />}/>
           <Route path='/library' element={<Library />} />
           <Route path={`/library/:titulo`} element={<AboutBook />} />
+          <Route path={`catalogue/info_book/:titulo`} element={<
+            InfoBook />}/>
           <Route path='/form_book' element={<FormBook />}/>
-          <Route path='/catalogue' element={<Catalogue />}/>
+          <Route path='/catalogue' element={<Catalogue />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

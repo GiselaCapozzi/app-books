@@ -27,11 +27,11 @@ export const getAllBooksUserById = async (req, res) => {
       SELECT * FROM books WHERE user_id = ? 
     `, [userId]);
 
-    if (rows.length < 1) {
-      return res.status(204).json({
-        message: 'No hay ningun libro aún agregado'
-      })
-    }
+    // if (rows.length < 1) {
+    //   return res.status(204).json({
+
+    //   })
+    // }
 
     return res.json(rows);
 
@@ -78,6 +78,7 @@ export const createNewBook = async (req, res) => {
       message: 'Libro creado con exito'
     })
   } catch (error) {
+    console.log(error)
     res.status(500).json({
       error: error
     })

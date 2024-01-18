@@ -1,5 +1,9 @@
+// BookDetailsForm.jsx
+// Muestra un formulario para completar con detalles de un libro 
+
 import BookImage from "./BookImage"
 import BookFormInput from "./BookFormInput"
+import BookTextArea from "./BookTextArea"
 
 const BookDetailsForm = ({
   bookData: {
@@ -24,7 +28,7 @@ const BookDetailsForm = ({
         onChange={handleChange}
       />
       {
-        !titulo && <p>{error.titulo}</p>
+        !titulo && <p className='text-red-500 font-semibold centrar mb-3'>{error.titulo}</p>
       }
       <BookFormInput
         type='text'
@@ -35,6 +39,8 @@ const BookDetailsForm = ({
       />
       <BookImage
         portada={portada}
+        className='w-40 m-auto my-5 rounded-lg shadow-md shadow-black'
+        titulo={titulo}
       />
       <BookFormInput
         type='text'
@@ -44,7 +50,7 @@ const BookDetailsForm = ({
         onChange={handleChange}
       />
       {
-        !autor && <p>{error.autor}</p>
+        !autor && <p className='text-red-500 font-semibold centrar mb-3'>{error.autor}</p>
       }
       <BookFormInput
         type='number'
@@ -54,7 +60,7 @@ const BookDetailsForm = ({
         onChange={handleChange}
       />
       {
-        !isbn && <p>{error.isbn}</p>
+        !isbn && <p className='text-red-500 font-semibold centrar mb-3'>{error.isbn}</p>
       }
       <BookFormInput
         type='number'
@@ -77,10 +83,8 @@ const BookDetailsForm = ({
         value={paginas}
         onChange={handleChange}
       />
-      <label className="block text-blue-700 text-sm font-bold mb-2">Sinopsis</label>
-      <textarea
-        name="sinopsis"
-        className="w-full p-2 border-b-2 border-slate-700 rounded focus:outline-none focus:border-blue-500"
+      <BookTextArea 
+        name='sinopsis'
         value={sinopsis}
         onChange={handleChange}
       />

@@ -1,37 +1,44 @@
-import { faUser, faUserCircle } from "@fortawesome/free-solid-svg-icons";
-import Icon from "./Icon";
+// BookCatalogue.jsx
+// Representación visual de un libro en un catálogo
+
+import BookImage from "./BookImage";
+import BookDetails from "./BookDetails";
+import AddedByInfo from "./AddedByInfo";
+import Button from "./Button";
 
 const BookCatalogue = ({
   username,
   titulo,
   autor,
   sinopsis,
-  portada
+  portada,
+  nickname,
+  goAboutBook,
+  book
 }) => {
-  
+
   return (
     <div className='max-w-72 mx-auto h-auto bg-emerald-200 shadow-lg rounded-md relative'>
-      <img
-        src={portada}
-        alt=""
+      <BookImage 
+        portada={portada}
         className='m-auto w-auto h-64 mb-4 object-contain rounded-md'
+        titulo={titulo}
       />
-      <div className="mx-2 h-56">
-        <h2 className='text-xl font-bold'>{titulo}</h2>
-        <p className='text-sm text-gray-700 mb-4 mt-0'>{autor}</p>
-        <p className='text-gray-600'>{sinopsis.slice(0, 50)}...</p>
-      </div>
+      <BookDetails 
+        titulo={titulo}
+        autor={autor}
+        sinopsis={sinopsis}
+      />
       <div className="absolute bottom-0 left-0 right-0">
-        <div className="flex items-center justify-end">
-          <Icon
-            icon={faUserCircle}
-            color='blue'
-            className='mx-1'
-            size='1x'
-          />
-          <p className="text-xs mr-4">Agregado por @{username}</p>
-        </div>
-        <button className="button-login mt-2">Saber más</button>
+        <AddedByInfo 
+          nickname={nickname}
+          username={username}
+        />
+        <Button
+          children='Saber más'
+          onClick={() => goAboutBook(book)}
+          className='button-login mt-2'
+        />
       </div>
     </div>
   );

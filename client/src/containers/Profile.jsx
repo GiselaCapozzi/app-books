@@ -1,16 +1,8 @@
 import { faUserLarge } from "@fortawesome/free-solid-svg-icons";
-import Icon from "./Icon";
+import Icon from "../components/Icon";
 import { useAuth } from "../context/authContext";
 
 const Profile = () => {
-
-  // const user = {
-  //   username: 'nombre_de_usuario',
-  //   firstName: 'Nombre',
-  //   lastName: 'Apellido',
-  //   email: 'correo@ejemplo.com',
-  // };
-
 const { user } = useAuth();
   return (
     <div className="flex justify-center items-center max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">

@@ -65,3 +65,10 @@
   ease-in-out 
   duration-500
 }
+
+.commonCellStyle {
+  @apply
+  p-3
+  border
+border-gray-300
+}
