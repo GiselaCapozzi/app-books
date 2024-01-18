@@ -1,14 +1,14 @@
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import Swal from 'sweetalert2';
+import useCustomDispatch from './useCustomDispatch';
 
 const useAlerta = () => {
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+ const { customDispatch } = useCustomDispatch();
 
-  const alertaMensaje = (icon, title) => {
-    Swal.fire({
+  const alertaMensaje = async (icon, title) => {
+    await Swal.fire({
       position: 'center',
       icon: icon,
       title: title,
@@ -17,8 +17,8 @@ const useAlerta = () => {
     })
   }
 
-  const alertaPregunta = (title, icon, confirmButtonText, cancelButtonText, dispatchAction) => {
-    Swal.fire({
+  const alertaPregunta = async (title, icon, confirmButtonText, cancelButtonText, dispatchAction) => {
+    await Swal.fire({
       title,
       icon,
       showCancelButton: true,
@@ -28,7 +28,7 @@ const useAlerta = () => {
     })
       .then(result => {
         if (result.isConfirmed) {
-          dispatch(dispatchAction())
+          customDispatch(dispatchAction())
           alertaMensaje('success', 'El libro ha sido eliminado');
           navigate('/library');
         } else if (result.isDismissed) {

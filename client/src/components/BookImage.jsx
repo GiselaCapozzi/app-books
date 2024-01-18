@@ -1,12 +1,16 @@
-const BookImage = ({ portada, titulo }) => {
+// BookImage.jsx
+// Componente funcional que acepta tres propiedades y devuelve un
+// elemento imagen
+
+const BookImage = ({ portada, titulo, className }) => {
   return (
     <img 
     src={
-      !portada ? 
+      portada ||
       'https://www.cucea.udg.mx/sites/default/files/styles/publicaciones/public/publicaciones/portadas/sin_portada_8.jpg?itok=yR2MLoZs' 
-      : portada} 
+      } 
     alt={titulo} 
-    className="w-40 m-auto my-5 rounded-lg shadow-md shadow-black"
+    className={className}
     />
   )
 }

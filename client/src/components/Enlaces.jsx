@@ -1,3 +1,6 @@
+// Enlaces.jsx
+// Proporciona una forma de crear enlaces de navegación
+
 import { Link } from "react-router-dom"
 
 const Enlaces = ({ to, children, onClick }) => {

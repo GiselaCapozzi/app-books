@@ -1,3 +1,8 @@
+// BookFormInput.jsx
+// Componente funcional que se utiliza para crear campos de entrada
+// dentro de un formulario, para capturar información relacionada con
+// el libro
+
 const BookFormInput = ({ 
   children, 
   type, 

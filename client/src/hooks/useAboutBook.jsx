@@ -1,19 +1,16 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { deleteBook, fetchBooks } from '../slice/books/bookSlice';
 import useAlerta from './useAlerta';
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { useAuth } from '../context/authContext';
-import useLibrary from './useLibrary';
+import useCustomDispatch from './useCustomDispatch';
 
 const useAboutBook = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
   const { alertaPregunta } = useAlerta();
-  const dispatch = useDispatch();
-const { token } = useAuth();
+  const { customDispatch } = useCustomDispatch();
 
+  // Deestructurar los detalles del libro directamente desde location.state.book
   const {
     titulo,
     autor,
@@ -26,6 +23,7 @@ const { token } = useAuth();
     id
   } = location.state.book;
 
+  // Función para navegar al formulario de edición del libro
   const onEdit = () => {
     navigate('/form_book', {
       state: {
@@ -45,21 +43,18 @@ const { token } = useAuth();
     })
   }
 
+  // Función para borrar un libro
+  // Muestra una alerta de confirmación antes de borrar, si la respuesta es positiva prosigue a enviar la acción deleteBook y luego envía la acción fetchBooks para obtener la lista actualizada y finalmente navega a la biblioteca luego de completar ambas acciones
   const onDelete = async (token, id) => {
     try {
-      await alertaPregunta(`¿Quieres borrar ${titulo} de la biblioteca?`, 'warning', 'Si, borralo', 'No, conservarlo', async () => {
-        // Dispatch the deleteBook action
-        await dispatch(deleteBook({ token, id }));
-  
-        // Dispatch the fetchBooks action to get the updated list
-        await dispatch(fetchBooks(token));
-  
-        // Navigate after both actions are completed
+      await alertaPregunta(`¿Quieres borrar ${titulo} de la biblioteca?`, 'warning', 'Si, borrar', 'No, conservar', async () => {
+        await customDispatch(deleteBook({ token, id }));
+        await customDispatch(fetchBooks(token));
         navigate('/library');
       });
     } catch (error) {
       console.error("Error deleting book:", error);
-      // Handle errors here if needed
+      throw new Error('Error al borrar un libro');
     }
   };
 

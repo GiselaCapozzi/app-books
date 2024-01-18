@@ -1,15 +1,17 @@
-import useFormBook from "../hooks/useFormBook"
-import BookDetailsForm from "./BookDetailsForm";
-import BookFormActions from "./BookFormActions";
-import { useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom"
+// FormBook.jsx
+// Componente de formulario que se utiliza para agregar o editar 
+// información sobre libros en una biblioteca
+
+import { useLocation } from 'react-router-dom';
+import useFormBook from '../hooks/useFormBook';
+import BookDetailsForm from "../components/BookDetailsForm";
+import BookFormActions from "../components/BookFormActions";
+import BookError from '../components/BookError';
 
 const FormBook = () => {
 
 const location = useLocation();
-const isEditing = location.state && location.state.isEditing;
-const navigate = useNavigate();
-
+const isEditing = location.state?.isEditing || false;
 const {
     bookData,
     handleChange,
@@ -28,13 +30,18 @@ const {
     id: isEditing ? location.state.dataBook.id : null
   }, isEditing);
 
+const formHeading = isEditing 
+  ? `Editar ${location.state.dataBook.titulo} de la biblioteca`
+  : 'Agregar libro a la biblioteca';
+
+  if (isEditing && !location.state || isEditing && !location.state.dataBook) {
+    // Esto ocurre en el caso en donde location.state.book no este definido
+    return <BookError children='Error: el formulario no está disponible.'/>
+  }
+
   return (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-8">
-      {
-        isEditing 
-        ? <p className="text-xl text-center font-bold my-7">Editar {location.state.dataBook.titulo} de la biblioteca</p> 
-        : <p className="text-xl text-center font-bold my-7">Agregar libro a la biblioteca</p>
-      }
+      <p className="text-xl text-center font-bold my-7">{formHeading}</p>
       <div className="grid grid-cols-2 gap-4 ">
         <BookDetailsForm 
           bookData={bookData}

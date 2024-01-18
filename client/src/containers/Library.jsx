@@ -1,9 +1,14 @@
+// Library.jsx
+// Destinado a mostrar una lista de libros, permite agregar nuevos libros
+// y ajusta lapresentación según el tamaño de la pantalla
+
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import BookTable from './BookTable';
 import BookCard from './BookCard';
 import useLibrary from '../hooks/useLibrary';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { fetchBooks } from '../slice/books/bookSlice';
+import Button from '../components/Button';
 
 const Library = () => {
 
@@ -32,10 +37,14 @@ const Library = () => {
     <div>
       {
         token &&
-        <>
-          <button
-            onClick={goToCreateNewBook}
-            className='button-login'>Agregar un nuevo libro</button>
+        <div>
+          <div className='centrar w-full'>
+            <Button
+              children='Agregar un nuevo libro'
+              className='button-login'
+              onClick={goToCreateNewBook}
+            />
+          </div>
           <div className='hidden lg:block'>
             <BookTable
               books={books}
@@ -46,7 +55,7 @@ const Library = () => {
               books={books}
             />
           </div>
-        </>
+        </div>
       }
     </div>
   )

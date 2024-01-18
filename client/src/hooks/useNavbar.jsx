@@ -1,8 +1,15 @@
-import { useDispatch } from "react-redux";
-import { useAuth } from "../context/authContext";
+// useNavbar.jsx
+// Custom hook para administrar la funcionalidad relacionada con la navegacion en el componente Navbar
+
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/authContext';
 import { clearToken } from '../slice/auth/authSlice';
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+
+/**
+ * Hook personalizado para gestionar la funcionalidad de la barra de navegación.
+ * @returns {Object} Objeto con propiedades y funciones relacionadas con la navegación.
+ */
 
 export const useNavbar = () => {
 
@@ -10,20 +17,20 @@ export const useNavbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-
-  }, [dispatch])
-
-  
+  // Función para limpiar el token y eliminar el objeto 'user' almacenado en sessionStorage luego de cerrar sesión y a la vez redirigir al usuario a la página de inicio
   const handleClick = () => {
     try {
       dispatch(clearToken());
-      sessionStorage.removeItem('user')
+      sessionStorage.removeItem('user');
+      navigate('/'); // Redirige al usuario a la página de inicio después de cerrar sesión.
     } catch (error) {
-      console.log(error)
+      console.error('Error limpiando el token:', error);
+      // Lanza una nueva excepcion indicando que ha ocurrido un error al intentar eliminar el token
+      throw new Error('Ha ocurrido un error al intentar eliminar el token');
     }
   }
 
+// Representa enlaces de navegacion para una interfaz de usuario
   const links = [
     {
       id: 1,
@@ -60,23 +67,28 @@ export const useNavbar = () => {
     }
   ]
 
-  const conUsuario = links.slice(0, 4);
-  const sinUsuario = links.slice(0, 3).concat({
-    id: 5,
-    to: '/login',
-    label: 'Iniciar sesión'
-  },
-  {
-    id: 6,
-    to: '/register',
-    label: 'Registrarse'
-  });
+  // Contiene los primeros 4 enlaces del array original 'links'. Y son relevantes cuando un usuario a iniciado sesión
+  const menuConUsuario = links.slice(0, 4);
+  
+  // Es una versión modificada de 'menuConUsuario' que elimina el enlace de 'Cerrar sesión' y agrega los enlaces de 'Iniciar sesión' y 'Registrarse'. Es relevante cuando el usuario no ha iniciado sesion. 
+  const menuSinUsuario = menuConUsuario.slice(0, 3).concat( 
+    {
+      id: 5,
+      to: '/login',
+      label: 'Iniciar sesión'
+    },
+    {
+      id: 6,
+      to: '/register',
+      label: 'Registrarse'
+    }
+  );
 
   return {
     links,
     isAuthenticated,
-    conUsuario,
-    sinUsuario,
+    menuConUsuario,
+    menuSinUsuario,
     handleClick
   }
 }
