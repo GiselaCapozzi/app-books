@@ -1,10 +1,10 @@
 import { createContext, useContext } from 'react';
 import { useSelector } from 'react-redux';
 
-export const authContext = createContext();
+export const AuthContext = createContext();
 
 export const useAuth = () => {
-  const context = useContext(authContext);
+  const context = useContext(AuthContext);
   if (!context) throw new Error('No hay un proveedor de autentificación')
   return context;
 }
@@ -16,5 +16,5 @@ export const AuthProvider = ({ children }) => {
 
   sessionStorage.setItem('user', JSON.stringify(value));
 
-  return <authContext.Provider value={value}>{children}</authContext.Provider>
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 };

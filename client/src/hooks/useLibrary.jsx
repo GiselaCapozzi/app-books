@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useAuth } from '../context/authContext';
+import { useAuth } from '../context/AuthContext';
 import { fetchBooks } from '../slice/books/bookSlice';
 import { useNavigate } from 'react-router-dom';
 

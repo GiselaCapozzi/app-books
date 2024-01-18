@@ -3,7 +3,7 @@
 // dos botones con la opción de editar o eliminar el mismo
 
 import useAboutBook from '../hooks/useAboutBook';
-import { useAuth } from '../context/authContext';
+import { useAuth } from '../context/AuthContext';
 import BookInfo from '../components/BookInfo';
 import BookError from '../components/BookError';
 import BookActions from '../components/BookActions';

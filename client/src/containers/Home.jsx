@@ -3,7 +3,7 @@
 // autenticadp muestra también el componente UserProfile
 
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/authContext';
+import { useAuth } from '../context/AuthContext';
 import UserProfile from '../components/UserProfile';
 
 const Home = () => {

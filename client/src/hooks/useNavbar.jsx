@@ -3,7 +3,7 @@
 
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/authContext';
+import { useAuth } from '../context/AuthContext';
 import { clearToken } from '../slice/auth/authSlice';
 
 /**
