@@ -31,6 +31,10 @@ app.use(cors({
 app.use('/auth', AuthRoutes);
 app.use('/books', BooksRoutes);
 
+app.get('/', (req, res) => {
+  res.send('Hello world')
+})
+
 // Inicio del servidor
 app.listen(app.get('port'), () => {
   console.log(`Listening on port http://localhost:${app.get('port')}`)
