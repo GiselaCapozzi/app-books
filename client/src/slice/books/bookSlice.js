@@ -9,7 +9,7 @@ const initialState = {
 
 export const fetchBooks = createAsyncThunk('books/fetchBooks', async (token) => {
 try {
-  const response = await fetch(`${API_ENDPOINTS.BOOKS}`, {
+  const response = await fetch(`${API_ENDPOINTS.BOOKS}` || `https://app-books-beta.vercel.app/books`, {
     headers: {
       'Content-Type': 'application/json',
       Authorization: token
@@ -34,7 +34,7 @@ if (!Array.isArray(data)) {
 
 export const createBook = createAsyncThunk('books/createBook', async ({ token, bookData }) => {
   try {
-    const response = await fetch(`${API_ENDPOINTS.BOOKS}`, {
+    const response = await fetch(`${API_ENDPOINTS.BOOKS}` || `https://app-books-beta.vercel.app/books`, {
       method: 'POST',
       body: JSON.stringify(bookData),
       headers: {
@@ -51,7 +51,7 @@ export const createBook = createAsyncThunk('books/createBook', async ({ token, b
 
 export const updateBook = createAsyncThunk('books/updateBook', async ({ token, bookData, id }) => {
   try {
-    const response = await fetch(`${API_ENDPOINTS.BOOKS}/${id}`, {
+    const response = await fetch(`${API_ENDPOINTS.BOOKS}/${id}` || `https://app-books-beta.vercel.app/books/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ export const updateBook = createAsyncThunk('books/updateBook', async ({ token, b
 
 export const deleteBook = createAsyncThunk('books/deleteBook', async ({ token, id }) => {
     try {
-    const response = await fetch(`${API_ENDPOINTS.BOOKS}/${id}`, {
+    const response = await fetch(`${API_ENDPOINTS.BOOKS}/${id}` || `https://app-books-beta.vercel.app/books/${id}`, {
       method: 'DELETE',
       headers: {
         Authorization: token

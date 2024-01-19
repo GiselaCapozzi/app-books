@@ -9,7 +9,7 @@ const initialState = {
 
 export const getAllBooksUsers = createAsyncThunk('books/getAllBooks', async () => {
   try {
-    const response = await fetch(`http://localhost:4000/books/books_user`, {
+    const response = await fetch(`http://localhost:4000/books/books_user` || `https://app-books-beta.vercel.app/books/books_user`, {
       headers: {
         'Content-Type': 'application/json'
       }
