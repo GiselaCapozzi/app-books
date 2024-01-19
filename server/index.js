@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import morgan from 'morgan';
 import cors from 'cors';
 
+import { PORT } from './src/config.js';
+
 import { router as AuthRoutes } from './src/routes/auth.routes.js';
 import { router as BooksRoutes } from './src/routes/book.routes.js';
 
@@ -12,7 +14,7 @@ dotenv.config();
 // Se crea una instancia de la aplicación Express
 const app = express();
 
-app.set('port', process.env.PORT || 4500); // Puerto en donde se ejecutará el servidor o el valor por defecto 4500
+app.set('port', PORT); // Puerto en donde se ejecutará el servidor o el valor por defecto 4500
 
 // Middleware: express.json() para analizar el cuerpo de las solicitudes en formato JSON
 app.use(express.json());
