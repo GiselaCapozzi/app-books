@@ -25,7 +25,7 @@ app.use(morgan('dev'));
 // Middleware: CORS para permitir solicitudes desde todos los origenes
 app.use(cors({
   'methods': ['GET', 'POST', 'PUT', 'DELETE'],
-  'origin': ['http://localhost:5173', 'https://app-books-beta.vercel.app']
+  'origin': ['https://app-books-beta.vercel.app']
 }))
 
 app.use('/auth', AuthRoutes);
