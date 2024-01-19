@@ -25,7 +25,7 @@ app.use(morgan('dev'));
 // Middleware: CORS para permitir solicitudes desde todos los origenes
 app.use(cors({
   'methods': ['GET', 'POST', 'PUT', 'DELETE'],
-  'origin': ['https://app-books-beta.vercel.app']
+  'origin': ['https://libraryvirtual.netlify.app']
 }))
 
 app.use('/auth', AuthRoutes);
