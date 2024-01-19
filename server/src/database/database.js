@@ -8,7 +8,7 @@ import {
 } from '../config.js';
 import dotenv from 'dotenv';
 dotenv.config();
-// 
+
 // Creación de la pool de MySQL
 const db = createPool({
   host: HOST,
