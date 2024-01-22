@@ -32,7 +32,7 @@ app.use('/auth', AuthRoutes);
 app.use('/books', BooksRoutes);
 
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send('Hello')
 })
 
 // Inicio del servidor
