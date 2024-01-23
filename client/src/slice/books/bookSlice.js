@@ -151,7 +151,7 @@ export const booksSlice = createSlice({
         state.status= 'succeeded';
         state.books = state.books.map(book => book.id === action.payload.id ? action.payload : book);
       })
-      .addCase(updateBook.reject, (state, action) => {
+      .addCase(updateBook.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       })
@@ -162,7 +162,7 @@ export const booksSlice = createSlice({
         state.status = 'succeeded';
         state.books = state.books.filter(book => book.id !== action.payload);
       })
-      .addCase(deleteBook.reject, (state, action) => {
+      .addCase(deleteBook.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       })
