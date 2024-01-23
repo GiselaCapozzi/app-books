@@ -90,31 +90,28 @@ export const updateBook = createAsyncThunk('books/updateBook', async ({ token, b
   }
 });
 
-export const deleteBook = createAsyncThunk(
-  'books/deleteBook',
-  async ({ token, id }, { rejectWithValue }) => {
-    try {
-      const response = await fetch(`https://app-books-beta.vercel.app/books/${id}`, {
-        method: 'DELETE',
-        headers: {
-          Authorization: token
-        }
-      });
-
-      if (!response.ok) {
-        // Si la respuesta no es exitosa, lanzamos un error con el código de estado
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Error al eliminar el libro');
+export const deleteBook = createAsyncThunk('books/deleteBook', async ({ token, id }, { rejectWithValue }) => {
+  try {
+    const response = await fetch(`https://app-books-beta.vercel.app/books/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: token
       }
+    });
 
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      // Manejamos el error utilizando rejectWithValue para que Redux Toolkit lo maneje correctamente
-      return rejectWithValue(error.message || 'Error al eliminar el libro');
+    if (!response.ok) {
+      // Si la respuesta no es exitosa, lanzamos un error con el código de estado
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Error al eliminar el libro');
     }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    // Manejamos el error utilizando rejectWithValue para que Redux Toolkit lo maneje correctamente
+    return rejectWithValue(error.message || 'Error al eliminar el libro');
   }
-);
+});
 
 export const booksSlice = createSlice({
   name: 'books',
@@ -140,7 +137,7 @@ export const booksSlice = createSlice({
         state.status = 'succeeded';
         state.books.push(action.payload);
       })
-      .add(createBook.reject, (state, action) => {
+      .addCase(createBook.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload ? action.payload : 'An error occurred';
       })
@@ -148,7 +145,7 @@ export const booksSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(updateBook.fulfilled, (state, action) => {
-        state.status= 'succeeded';
+        state.status = 'succeeded';
         state.books = state.books.map(book => book.id === action.payload.id ? action.payload : book);
       })
       .addCase(updateBook.rejected, (state, action) => {
