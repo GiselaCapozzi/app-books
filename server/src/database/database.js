@@ -11,12 +11,11 @@ dotenv.config();
 
 // Creación de la pool de MySQL
 const db = createPool({
-  host: HOST,
+  host: DB_HOST,
   user: USER,
   password: PASSWORD,
   database: DATABASE,
   port: DB_PORT,
-  socketPath: '/var/run/mysqld/mysqld.sock',
   connectionLimit: 10 // Número máxiomo de conexiones en la pool
 })
 
