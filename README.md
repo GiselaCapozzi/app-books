@@ -123,3 +123,8 @@ npm run build
 ![Página principal sin usuario](image.png)
 
 ![Página principal con usuario](image-1.png)
+
+![Lista de libros agregados por el usuario](image-2.png)
+
+## Backend
+![Base de datos](image-3.png)
