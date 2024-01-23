@@ -15,6 +15,7 @@ La Biblioteca Virtual es una plataforma web que permite a los usuarios una vez r
 - Vercel para el despliegue del backend
 - Render para la base de datos
 
+```
 2. Arquitectura
 /app-books
 ├── client
@@ -43,3 +44,4 @@ La Biblioteca Virtual es una plataforma web que permite a los usuarios una vez r
 │    ├── vercel.json
 │   └── index.js
 └── README.md
+```
