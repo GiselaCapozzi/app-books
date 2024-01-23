@@ -16,6 +16,7 @@ const db = createPool({
   password: PASSWORD,
   database: DATABASE,
   port: DB_PORT,
+  socketPath: '/var/run/mysqld/mysqld.sock',
   connectionLimit: 10 // Número máxiomo de conexiones en la pool
 })
 
