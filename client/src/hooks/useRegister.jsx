@@ -34,7 +34,7 @@ const useRegister = () => {
   
   const registerUser = async (registerData) => {
     try {
-      const response = await fetch(`${API_ENDPOINTS.USERS}/register` || `https://app-books-beta.vercel.app/auth/register`, {
+      const response = await fetch(`https://app-books-beta.vercel.app/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
