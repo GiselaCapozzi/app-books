@@ -120,4 +120,6 @@ npm run build
 # Capturas de pantalla
 
 ## Frontend
-![Alt text](image.png)
+![Página principal sin usuario](image.png)
+
+![Página principal con usuario](image-1.png)
