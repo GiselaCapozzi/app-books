@@ -2,7 +2,7 @@ import { createPool } from 'mysql2/promise';
 import {
   DATABASE,
   DB_PORT,
-  HOST,
+  DB_HOST,
   PASSWORD,
   USER
 } from '../config.js';
